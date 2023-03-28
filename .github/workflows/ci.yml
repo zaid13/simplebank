@@ -33,6 +33,8 @@ jobs:
             --health-interval 10s
             --health-timeout 5s
             --health-retries 5
+          ports:
+            - 12346:5432
 
     steps:
       - name: set up Go 1.x
