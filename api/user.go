@@ -2,6 +2,7 @@ package api
 
 import (
 	"database/sql"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/lib/pq"
 	db "github.com/zaid13/simplebank/db/sqlc"
@@ -107,6 +108,7 @@ func (server *Server) loginUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
+	fmt.Println(accessToken)
 	rsp := logininUserResponse{
 		AccessToken: accessToken,
 		User:        newUserResponse(user),
