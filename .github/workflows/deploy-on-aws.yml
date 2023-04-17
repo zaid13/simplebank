@@ -42,5 +42,6 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker image push  $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker tag simplebank:latest 473284017862.dkr.ecr.eu-north-1.amazonaws.com/simplebank:latest
+          docker push 473284017862.dkr.ecr.eu-north-1.amazonaws.com/simplebank:latest
 
