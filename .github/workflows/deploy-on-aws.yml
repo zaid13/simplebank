@@ -18,7 +18,11 @@ jobs:
 
 
     steps:
-
+      - shell: bash
+        env:
+          SUPER_SECRET: ${{ secrets.ARN }}
+        run: |
+          example-command "$SUPER_SECRET"
       - name: Test
         env:
           TEST_GITHUB_TOKEN: ${{ secrets.ARN }}
