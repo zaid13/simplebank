@@ -13,28 +13,32 @@ jobs:
   build:
     name: build image
     runs-on: ubuntu-latest
-      steps:
+      
+      
+      
+      
+    steps:
 
-        - name: Check out code in go module directory
-          uses: actions/checkout@v2
+      - name: Check out code in go module directory
+        uses: actions/checkout@v2
 
-        - name: Configure AWS credentials
-          uses: aws-actions/configure-aws-credentials@v2
-          with:
-            role-to-assume: ${{ secrets.ARN }}
-            aws-region: eu-north-1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.ARN }}
+          aws-region: eu-north-1
 
 
-        - name: Login to Amazon ECR
-          id: login-ecr
-          uses: aws-actions/amazon-ecr-login@v1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
-        - name: Build, tag, and push docker image to Amazon ECR
-          env:
-            REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-            REPOSITORY: simplebank
-            IMAGE_TAG: ${{ github.sha }}
-          run: |
-            docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-            docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+      - name: Build, tag, and push docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: simplebank
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
