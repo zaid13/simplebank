@@ -22,11 +22,15 @@ jobs:
       - name: Test
         env:
           TEST_GITHUB_TOKEN: ${{ secrets.ARN }}
-         
+
         run: |
           echo ${#TEST_GITHUB_TOKEN}
-
           
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
       - name: Check out code in go module directory
         uses: actions/checkout@v2
 
