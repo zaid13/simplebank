@@ -13,12 +13,20 @@ jobs:
   build:
     name: build image
     runs-on: ubuntu-latest
-      
-      
-      
-      
+
+
+
+
     steps:
 
+      - name: Test
+        env:
+          TEST_GITHUB_TOKEN: ${{ secrets.ARN }}
+         
+        run: |
+          echo ${#TEST_GITHUB_TOKEN}
+
+          
       - name: Check out code in go module directory
         uses: actions/checkout@v2
 
